@@ -5,9 +5,9 @@ const CACHE_NAME = 'flutter-app-cache';
 
 const RESOURCES = {"version.json": "8e8ba4edcdd693560ce0f302a5966d24",
 "favicon.ico": "5d158f07d88458def11d7671fef083e3",
-"index.html": "162c3dd745dcc122cf225990e3ea3980",
-"/": "162c3dd745dcc122cf225990e3ea3980",
-"main.dart.js": "ab059c507a9b55c0bb44c86265aaaff3",
+"index.html": "4925c0267190282a1cdfdc586e3fb639",
+"/": "4925c0267190282a1cdfdc586e3fb639",
+"main.dart.js": "f75476ea066800fb0aba434ed27feefa",
 "flutter.js": "c71a09214cb6f5f8996a531350400a9a",
 "icons/Icon-192.png": "0524a5e8f0100e94e0ee1e7f07e4bfc0",
 "icons/Icon-512.png": "9671c54b8bfeb0760c208b09d3008c5b",
@@ -41,8 +41,9 @@ const CORE = ["main.dart.js",
 self.addEventListener("install", (event) => {
   self.skipWaiting();
   return event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(Object.values(RESOURCES));
+    caches.open(TEMP).then((cache) => {
+      return cache.addAll(
+        CORE.map((value) => new Request(value, {'cache': 'reload'})));
     })
   );
 });
