@@ -41,9 +41,8 @@ const CORE = ["main.dart.js",
 self.addEventListener("install", (event) => {
   self.skipWaiting();
   return event.waitUntil(
-    caches.open(TEMP).then((cache) => {
-      return cache.addAll(
-        (CORE.concat(RESOURCES)).map((value) => new Request(value, {'cache': 'reload'})));
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(Object.values(RESOURCES));
     })
   );
 });
